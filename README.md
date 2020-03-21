@@ -24,11 +24,20 @@ This sprint challenge is divided up into three parts:  Hash tables coding, block
 
 Explain in detail the workings of a dynamic array:
 * What is the runtime complexity to access an array, add or remove from the front, and add or remove from the back?
+    - To access an item in an array, we need that item's index in the array. That operation occurs in constant time.
+    - To add or remove an item from the front of an array requires shifting all other items in the array. That makes that operation O(n) in the worst case.
+    - To add an item at the end of an array is considered constant amortized time. This is because the array's capacity may need to be increased, which involves allocating a new chunk of memory and copying all items to the new larger array. In the best case it is O(1) and in the worst cas it would be O(n).
 * What is the worse case scenario if you try to extend the storage size of a dynamic array?
+    - In the worst case it would be O(n), otherwise known as linear time. That's because the amount of operations could end up matching the amount of items in the array, as each item has to be copied over from the smaller array to the new larger array.
 
-Explain how a blockchain is structured. What are the blocks, what is the chain? How is the data organized?
- 
-Explain how proof of work functions. How does it operate. How does this protect the chain from attack. What kind of attack is possible?
+
+Explain how a blockchain is structured. 
+* What are the blocks, what is the chain? How is the data organized?
+    - A blockchain is basically a linked list of objects or dictionaries, otherwise known as blocks. These blocks contain certain pieces of data like a timestamp, the hash of the preceding block, some transactions encoded in that block, etc. The chain then is this linkage of blocks by hash.
+* Explain how proof of work functions. How does it operate. How does this protect the chain from attack. What kind of attack is possible?
+    - Proof of work is a system for producing pieces of data that are hard and costly to create but can easily be verified by another person. Because generating proofs requires time, energy and processing power, the systems that are working to generate those proofs only have as much power over the blockchain as they can afford. To overcome the entire network, an individual would have to control 51% of the network, thus increasing their chance of generating the correct hash before everyone else. This is called a 51% attack. The economics of this makes it exceedingly unlikely that it would occur, i.e. because the costs would not only outweigh the rewards, but the network would lose trust in the entire chain if it is discovered that one group or individual controls 51% amount of the workers.
+
+    To generate a proof, a miner takes a stringification of the latest block in the chain and appends a random nonce to that block string. A hash is then generated from that block string-nonce concatenation. If that hash matches the verification parameters of the blockchain, the miner submits that proof to the blockchain node to collect a reward. The blockchain node then verifies that the proof matches the parameters, for example, that the generated hash is preceded by a certain amount of leading zeroes, and then decodes that hash to verify that the latest block in the chain is included in the proof.
 
 ## Project Set Up
 
