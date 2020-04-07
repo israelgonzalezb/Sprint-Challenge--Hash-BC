@@ -53,46 +53,46 @@ def reconstruct_trip(tickets, length):
 
 # print(result, expected)
 
-class Graph:
-    def __init__(self):
-        self.vertices = {
-            "A": {"B": 1},
-            "B": {"C": 3, "D": 2},
-            "C": {"E": 4},
-            "D": {"E": 2},
-            "E": {"F": 3},
-            "F": {},
-            "G": {"D": 1}
-        }
+# class Graph:
+#     def __init__(self):
+#         self.vertices = {
+#             "A": {"B": 1},
+#             "B": {"C": 3, "D": 2},
+#             "C": {"E": 4},
+#             "D": {"E": 2},
+#             "E": {"F": 3},
+#             "F": {},
+#             "G": {"D": 1}
+#         }
 
-class Graph:
-    def __init__(self):
-        #  A B C D E F G
-        #A
-        #B
-        #C
-        #D
-        #E
-        #F
-        #G
-        self.edges = [[0,1,0,0,0,0,0],
-                      [0,0,3,2,1,0,0],
-                      [0,0,0,0,4,0,0],
-                      [0,0,0,0,2,0,0],
-                      [0,0,0,0,0,3,0],
-                      [0,0,0,0,0,0,0],
-                      [0,0,0,1,0,0,0]]
+# class Graph:
+#     def __init__(self):
+#         #  A B C D E F G
+#         #A
+#         #B
+#         #C
+#         #D
+#         #E
+#         #F
+#         #G
+#         self.edges = [[0,1,0,0,0,0,0],
+#                       [0,0,3,2,1,0,0],
+#                       [0,0,0,0,4,0,0],
+#                       [0,0,0,0,2,0,0],
+#                       [0,0,0,0,0,3,0],
+#                       [0,0,0,0,0,0,0],
+#                       [0,0,0,1,0,0,0]]
 
-"""
-The adjacency list takes up less space than the matrix, because the matrix tracks all edges.
+# """
+# The adjacency list takes up less space than the matrix, because the matrix tracks all edges.
 
-It would be easier to add an item to the adjaceny list, because the matrix involves multiple array methods and shifts.
+# It would be easier to add an item to the adjaceny list, because the matrix involves multiple array methods and shifts.
 
-The graph is directed, so removing at item from the list would be easier.
-Removing from the matrix would involve multiple array methods.
+# The graph is directed, so removing at item from the list would be easier.
+# Removing from the matrix would involve multiple array methods.
 
-Finding an edge is easy in both.
+# Finding an edge is easy in both.
 
-Getting all edges is more difficult in the matrix because you would have to iterate through an entire row.
-With the list, you ould just return the value of the specific vertex.
-"""
+# Getting all edges is more difficult in the matrix because you would have to iterate through an entire row.
+# With the list, you ould just return the value of the specific vertex.
+# """

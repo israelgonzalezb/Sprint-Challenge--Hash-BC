@@ -58,9 +58,9 @@ def valid_proof(last_hash, proof):
     proof = hashlib.sha256(proof).hexdigest()
     proof_leading_chars = proof[:6]
 
-    print("Matcher", last_hash_trailing_chars, proof_leading_chars)
     
     if last_hash_trailing_chars == proof_leading_chars:
+        print("Matcher", last_hash_trailing_chars, proof_leading_chars)
         return True
     else:
         return False
