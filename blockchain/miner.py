@@ -2,6 +2,7 @@ import hashlib
 import requests
 
 import sys
+import json
 
 from uuid import uuid4
 
@@ -21,10 +22,21 @@ def proof_of_work(last_proof):
     """
 
     start = timer()
+    last_proof = f'{last_proof}'.encode()
+
+    last_hash = hashlib.sha256(last_proof).hexdigest()
+    print("Previous proof and hash", last_proof, last_hash)
+
 
     print("Searching for next proof")
-    proof = 0
+    def random_proof():
+        power = 10**random.randrange(3,17) # create a random power of 10 to help us round our random number on the next line
+        return round(random.random()*power) # init proof with a random guess right off the bat
+    
+    proof = random_proof()
     #  TODO: Your code here
+    while valid_proof(last_hash, proof) is False:
+        proof = random_proof()
 
     print("Proof found: " + str(proof) + " in " + str(timer() - start))
     return proof
@@ -40,7 +52,18 @@ def valid_proof(last_hash, proof):
     """
 
     # TODO: Your code here!
-    pass
+    last_hash_trailing_chars = last_hash[-6:]
+
+    proof = f'{proof}'.encode()
+    proof = hashlib.sha256(proof).hexdigest()
+    proof_leading_chars = proof[:6]
+
+    print("Matcher", last_hash_trailing_chars, proof_leading_chars)
+    
+    if last_hash_trailing_chars == proof_leading_chars:
+        return True
+    else:
+        return False
 
 
 if __name__ == '__main__':
