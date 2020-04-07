@@ -2,6 +2,7 @@ import hashlib
 import requests
 
 import sys
+import json
 
 from uuid import uuid4
 
@@ -21,13 +22,34 @@ def proof_of_work(last_proof):
     """
 
     start = timer()
+    #last_proof = f'{last_proof}'.encode()
+
+    last_hash = hashlib.sha256(f'{last_proof}'.encode()).hexdigest()
+    print("Previous proof and hash", last_proof, last_hash)
+
 
     print("Searching for next proof")
-    proof = 0
+    def random_proof():
+        power = 100**random.randrange(10,17) # create a random power of 10 to help us round our random number on the next line
+        rounded_proof = round(random.random()*power) # init proof with a random guess right off the bat
+        #print("Trying proof ", rounded_proof)
+        return rounded_proof
+    
+    proof = random_proof()
+    # proof = last_proof
     #  TODO: Your code here
+    loops = 0
+    while valid_proof(last_hash, proof) is False:
+        loops += 1
+        proof += 1
+        if loops == 1000000:
+            print("New random int!")
+            loops = 0
+            proof = random_proof()
+    else:
+        print("Proof found: " + str(proof) + " in " + str(timer() - start))
+        return proof
 
-    print("Proof found: " + str(proof) + " in " + str(timer() - start))
-    return proof
 
 
 def valid_proof(last_hash, proof):
@@ -40,7 +62,21 @@ def valid_proof(last_hash, proof):
     """
 
     # TODO: Your code here!
-    pass
+    #print("Trying proof ", proof)
+
+    last_hash_trailing_chars = last_hash[-5:]
+
+    proof = f'{proof}'.encode()
+    proof = hashlib.sha256(proof).hexdigest()
+    proof_leading_chars = proof[:5]
+
+    
+    if last_hash_trailing_chars == proof_leading_chars:
+        print("Matcher", last_hash_trailing_chars, proof_leading_chars, proof)
+        return True
+    else:
+        #print("No match", last_hash_trailing_chars, proof_leading_chars)
+        return False
 
 
 if __name__ == '__main__':
